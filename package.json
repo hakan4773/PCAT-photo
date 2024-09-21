@@ -1,0 +1,27 @@
+{
+  "name": "pcat",
+  "version": "1.0.0",
+  "description": "PCAT photo App",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakan4773/PCAT-photo.git"
+  },
+  "keywords": [
+    "photo",
+    "app",
+    "camera"
+  ],
+  "author": "Hakan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hakan4773/PCAT-photo/issues"
+  },
+  "homepage": "https://github.com/hakan4773/PCAT-photo#readme",
+  "devDependencies": {
+    "prettier": "3.3.3"
+  }
+}
