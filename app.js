@@ -20,7 +20,8 @@ app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(fileUpload());
-app.use(methodOverride('_method'))
+app.use(methodOverride('_method',{
+  methods:['POST','GET']}))
 //ROUTES
 app.get('/', async (req, res) => {
   const photos = await Photo.find({}).sort("-dateCreated");//veritabanından verileri getir tarih sırasına göre yerleştir
@@ -62,6 +63,7 @@ app.post('/photos', async (req, res) => {
     await Photo.create({
       ...req.body,//tüm verileri getir
       image: "/uploads/" + uploadImage.name
+      
     });
 
     // Başarılı olduğunda ana sayfaya yönlendir
@@ -88,14 +90,12 @@ res.redirect(`/photos/${req.params.id}`)
 });
 
 app.delete("/photos/:id",async (req,res)=>{
-const photo=await Photo.findByIdAndDelete(req.params.id)
+const photo=await Photo.findOne({_id:req.params.id})
 let image=photo.image
-const deleteİmage=__dirname +"/public/uploads/"+image
-console.log("Silinecek dosyanın yolu:", deleteİmage);
-
-fs.unlink(deleteİmage)
+const deleteİmage=__dirname +"/public/"+image
+await Photo.findByIdAndDelete(req.params.id)
+fs.unlinkSync(deleteİmage)
 res.redirect('/');
-
 })
 
 
